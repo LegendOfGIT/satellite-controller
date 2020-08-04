@@ -1,0 +1,21 @@
+{
+  "name": "information-satellite",
+  "version": "0.0.1",
+  "devDependencies": {
+    "nodemon": "2.0.4",
+    "jest": "26.0.1"
+  },
+  "dependencies": {
+    "axios": "0.19.2",
+    "fastify": "2.14.1"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "start:dev": "nodemon src/server.js",
+    "code-coverage": "jest --collect-coverage",
+    "test": "jest"
+  },
+  "_moduleAliases": {
+    "@src": "/src"
+  }
+}
