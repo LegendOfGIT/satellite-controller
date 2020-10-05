@@ -18,28 +18,30 @@ const observeItem = () => {
         console.log('observing item ...');
         console.log(`items left: ${itemsToObserve.length}`);
 
-        const url = `http://127.0.0.1:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}`;
+        const url = `http://127.0.0.1:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call: ${url}`)
         httpClient.get(url);
     }
 
     setTimeout(() => {
         observeItem();
-    }, 3000 + Math.floor(Math.random() * 10000));
+    }, 3000 + Math.floor(Math.random() * 30000));
 };
 
 fastify.put('/observable-items', async (request, reply) => {
     reply.type('application/json').code(200);
 
     const requestBody = request.body;
-    let productIds = requestBody['product-ids'];
+    let productIds = requestBody['product-ids'] || [];
+    let navigationPath = requestBody['navigation-path'];
     const siteId = requestBody.site;
     const useCaseId = requestBody.usecase;
 
     itemsToObserve = itemsToObserve.concat(productIds.map(productId => ({
         siteId,
         useCaseId,
-        productId
+        productId,
+        navigationPath
     })));
 
     reply.send(itemsToObserve);
