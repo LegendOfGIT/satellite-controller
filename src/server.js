@@ -2,6 +2,10 @@ const httpClient = require('axios');
 
 let itemsToObserve = [];
 
+const sitesWithoutEans = [
+    'amazon-de_DE'
+];
+
 const fastify = require('fastify')({
     logger: true
 });
@@ -36,6 +40,8 @@ fastify.put('/observable-items', async (request, reply) => {
     let navigationPath = requestBody['navigation-path'];
     const siteId = requestBody.site;
     const useCaseId = requestBody.usecase;
+    let { eans = [] } = requestBody;
+    eans = Array.isArray(eans) ? eans : [eans];
 
     itemsToObserve = itemsToObserve.concat(productIds.map(productId => ({
         siteId,
@@ -43,6 +49,17 @@ fastify.put('/observable-items', async (request, reply) => {
         productId,
         navigationPath
     })));
+
+    if (eans) {
+        sitesWithoutEans.forEach((siteWithoutEans) => {
+            itemsToObserve = itemsToObserve.concat(eans.map(ean => ({
+                siteId: siteWithoutEans,
+                useCaseId: 'single-item-by-ean',
+                productId: ean,
+                navigationPath
+            })));
+        });
+    }
 
     reply.send(itemsToObserve);
 })
