@@ -2,8 +2,9 @@ const httpClient = require('axios');
 
 let itemsToObserve = [];
 
-const sitesWithoutEans = [
-    'amazon-de_DE'
+const sitesWithAvailableEanSearch = [
+    'amazon-de_DE',
+    'thalia-de_DE'
 ];
 
 const fastify = require('fastify')({
@@ -51,11 +52,11 @@ fastify.put('/observable-items', async (request, reply) => {
     })));
 
     if (eans) {
-        sitesWithoutEans.forEach((siteWithoutEans) => {
+        sitesWithAvailableEanSearch.forEach((siteWithAvailableEanSearch) => {
             itemsToObserve = itemsToObserve.concat(eans.map(ean => ({
-                siteId: siteWithoutEans,
+                siteId: siteWithAvailableEanSearch,
                 useCaseId: 'single-item-by-ean',
-                productId: ean,
+                productId: '{ean}' === (ean || '') ? '' : ean,
                 navigationPath
             })));
         });
