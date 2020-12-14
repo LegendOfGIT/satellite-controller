@@ -1,5 +1,6 @@
 const httpClient = require('axios');
 
+let categoriesToObserve = [];
 let itemsToObserve = [];
 
 const sitesWithAvailableEanSearch = [
@@ -33,6 +34,26 @@ const observeItem = () => {
     }, 3000 + Math.floor(Math.random() * 30000));
 };
 
+fastify.post('/observe-category', async (request, reply) => {
+    reply.type('application/json').code(200);
+
+    const requestBody = request.body;
+    const categoryId = requestBody['category-id'] || '';
+
+    if (categoryId) {
+        const category = categoriesToObserve.find(c => categoryId === c.id);
+        const categoryRequestCount = (category || { requestCount: 0 }).requestCount;
+
+        if (!category) {
+            categoriesToObserve.push({ id: categoryId, requestCount: 1 });
+        }
+        else {
+            category.requestCount = categoryRequestCount + 1;
+        }
+    }
+
+    reply.send([...categoriesToObserve].sort((a, b) => a.requestCount < b.requestCount ? 1 : -1 ));
+});
 fastify.put('/observable-items', async (request, reply) => {
     reply.type('application/json').code(200);
 
