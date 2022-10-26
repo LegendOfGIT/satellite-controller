@@ -3,6 +3,11 @@ const httpClient = require('axios');
 let categoriesToObserve = [];
 let itemsToObserve = [];
 
+const availableSites = [
+    'amazon-de_DE',
+    'otto-de_DE',
+    'thalia-de_DE'
+];
 const sitesWithAvailableEanSearch = [
     'amazon-de_DE',
     'thalia-de_DE'
@@ -26,7 +31,15 @@ const observeItem = () => {
 
         const url = `http://127.0.0.1:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call: ${url}`)
-        httpClient.get(url);
+        httpClient.get(url).catch(() => {});
+    }
+
+    const categoryToObserve = categoriesToObserve.pop();
+    if (categoryToObserve) {
+        availableSites.forEach(availableSite => {
+            const url = `http://127.0.0.1:3000/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
+            httpClient.get(url);
+        });
     }
 
     setTimeout(() => {
@@ -52,7 +65,8 @@ fastify.post('/observe-category', async (request, reply) => {
         }
     }
 
-    reply.send([...categoriesToObserve].sort((a, b) => a.requestCount < b.requestCount ? 1 : -1 ));
+    const sortedCategoryList = [...categoriesToObserve].sort((a, b) => a.requestCount < b.requestCount ? 1 : -1 );
+    reply.send(sortedCategoryList);
 });
 fastify.put('/observable-items', async (request, reply) => {
     reply.type('application/json').code(200);
