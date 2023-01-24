@@ -17,5 +17,10 @@
   },
   "_moduleAliases": {
     "@src": "/src"
+  },
+  "nodemonConfig": {
+    "env": {
+      "NODE_ENV": "development"
+    }
   }
 }

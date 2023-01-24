@@ -1,3 +1,4 @@
+const configuration = require('./configuration/app-config')();
 const httpClient = require('axios');
 
 let categoriesToObserve = [];
@@ -29,7 +30,7 @@ const observeItem = () => {
         console.log('observing item ...');
         console.log(`items left: ${itemsToObserve.length}`);
 
-        const url = `http://127.0.0.1:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
+        const url = `http://${configuration.services.satellite.host}:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call: ${url}`)
         httpClient.get(url).catch(() => {});
     }
@@ -37,7 +38,7 @@ const observeItem = () => {
     const categoryToObserve = categoriesToObserve.pop();
     if (categoryToObserve) {
         availableSites.forEach(availableSite => {
-            const url = `http://127.0.0.1:3000/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
+            const url = `http://${configuration.services.satellite.host}:3000/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
             httpClient.get(url);
         });
     }
@@ -100,7 +101,7 @@ fastify.put('/observable-items', async (request, reply) => {
     reply.send(itemsToObserve);
 })
 
-fastify.listen(3001, (err, address) => {
+fastify.listen({ host: configuration.application.host, port: 3001 }, (err, address) => {
     if (err) throw err
     fastify.log.info(`server listening on ${address}`);
 
