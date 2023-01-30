@@ -9,7 +9,7 @@ const availableSites = [
     'otto-de_DE',
     'thalia-de_DE'
 ];
-const sitesWithAvailableEanSearch = [
+const sitesWithAvailableGtinSearch = [
     'amazon-de_DE',
     'thalia-de_DE'
 ];
@@ -77,8 +77,8 @@ fastify.put('/observable-items', async (request, reply) => {
     let navigationPath = requestBody['navigation-path'];
     const siteId = requestBody.site;
     const useCaseId = requestBody.usecase;
-    let { eans = [] } = requestBody;
-    eans = Array.isArray(eans) ? eans : [eans];
+    let { gtins = [] } = requestBody;
+    gtins = Array.isArray(gtins) ? gtins : [gtins];
 
     itemsToObserve = itemsToObserve.concat(productIds.map(productId => ({
         siteId,
@@ -87,12 +87,12 @@ fastify.put('/observable-items', async (request, reply) => {
         navigationPath
     })));
 
-    if (eans) {
-        sitesWithAvailableEanSearch.forEach((siteWithAvailableEanSearch) => {
-            itemsToObserve = itemsToObserve.concat(eans.map(ean => ({
-                siteId: siteWithAvailableEanSearch,
-                useCaseId: 'single-item-by-ean',
-                productId: '{ean}' === (ean || '') ? '' : ean,
+    if (gtins) {
+        sitesWithAvailableGtinSearch.forEach((siteWithAvailableGtinSearch) => {
+            itemsToObserve = itemsToObserve.concat(gtins.map(gtin => ({
+                siteId: siteWithAvailableGtinSearch,
+                useCaseId: 'single-item-by-gtin',
+                productId: '{gtin}' === (gtin || '') ? '' : gtin,
                 navigationPath
             })));
         });
