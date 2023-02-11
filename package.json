@@ -2,7 +2,7 @@
   "name": "information-satellite",
   "version": "0.0.1",
   "devDependencies": {
-    "nodemon": "2.0.4",
+    "nodemon": "2.0.20",
     "jest": "26.0.1"
   },
   "dependencies": {
