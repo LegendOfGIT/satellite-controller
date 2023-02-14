@@ -31,7 +31,7 @@ const observeItem = () => {
         console.log(`items left: ${itemsToObserve.length}`);
 
         const url = `http://${configuration.services.satellite.host}:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
-        console.log(`call: ${url}`)
+        console.log(`call: ${url}`);
         httpClient.get(url).catch(() => {});
     }
 
@@ -39,7 +39,8 @@ const observeItem = () => {
     if (categoryToObserve) {
         availableSites.forEach(availableSite => {
             const url = `http://${configuration.services.satellite.host}:3000/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
-            httpClient.get(url);
+            console.log(`call: ${url}`);
+            httpClient.get(url).catch(() => {});
         });
     }
 
