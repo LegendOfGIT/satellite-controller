@@ -7,7 +7,8 @@ let itemsToObserve = [];
 const availableSites = [
     'amazon-de_DE',
     'otto-de_DE',
-    'thalia-de_DE'
+    'thalia-de_DE',
+    'shop24direct-de_DE'
 ];
 const sitesWithAvailableGtinSearch = [
     'amazon-de_DE',
