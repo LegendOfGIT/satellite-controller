@@ -6,6 +6,7 @@ let itemsToObserve = [];
 
 const availableSites = [
     'amazon-de_DE',
+    'mytoys-de_DE',
     'otto-de_DE',
     'thalia-de_DE',
     'shop24direct-de_DE'
