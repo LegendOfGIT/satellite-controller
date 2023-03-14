@@ -10,6 +10,7 @@ const availableSites = [
     'mytoys-de_DE',
     'otto-de_DE',
     'thalia-de_DE',
+    'shop-apotheke-de_DE',
     'shop24direct-de_DE'
 ];
 const sitesWithAvailableGtinSearch = [
