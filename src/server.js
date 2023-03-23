@@ -6,19 +6,17 @@ let itemsToObserve = [];
 
 const availableSites = [
     'amazon-de_DE',
+    'black-is-beautiful-de_DE',
     'big-green-smile-de_DE',
     'dress-for-less-de_DE',
     'mytoys-de_DE',
-    'otto-de_DE',
-    'thalia-de_DE',
     'shop-apotheke-de_DE',
     'shop24direct-de_DE',
     'top-parfuemerie-de_DE'
 ];
 const sitesWithAvailableGtinSearch = [
     'amazon-de_DE',
-    'big-green-smile-de_DE',
-    'thalia-de_DE'
+    'big-green-smile-de_DE'
 ];
 
 const fastify = require('fastify')({
