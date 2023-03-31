@@ -14,7 +14,8 @@ const availableSites = [
     'mytoys-de_DE',
     'shop-apotheke-de_DE',
     'shop24direct-de_DE',
-    'top-parfuemerie-de_DE'
+    'top-parfuemerie-de_DE',
+    'toom-de_DE'
 ];
 const sitesWithAvailableGtinSearch = [
     'amazon-de_DE',
