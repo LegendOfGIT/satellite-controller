@@ -1,5 +1,6 @@
 const configuration = require('./configuration/app-config')();
 const httpClient = require('axios');
+const repl = require("repl");
 
 let categoriesToObserve = [];
 let itemsToObserve = [];
@@ -107,6 +108,48 @@ fastify.put('/observable-items', async (request, reply) => {
 
     reply.send(itemsToObserve);
 })
+
+const getSiteIdBySiteInItemId = (siteInItemId) => {
+    console.log(siteInItemId);
+    const mapping = {
+        azo: 'amazon-de_DE',
+        bgs: 'big-green-smile-de_DE',
+        bisb: 'black-is-beautiful-de_DE',
+        dfl: 'dress-for-less-de_DE',
+        fmw: 'fussmatten-welt-de_DE',
+        myt: 'mytoys-de_DE',
+        shopapo: 'shop-apotheke-de_DE',
+        shop24d: 'shop24direct-de_DE',
+        tpf: 'top-parfuemerie-de_DE'
+    };
+
+    return mapping[siteInItemId] || '';
+};
+
+fastify.post('/update-item', async (request, reply) => {
+    reply.type('application/json').code(200);
+
+    const { itemId, navigationPath } = request.body;
+    console.log(itemId);
+    const itemIdTokens = (itemId || '').split('.');
+
+    if (2 !== (itemIdTokens || []).length) {
+        reply.send({ error: "given item id is invalid" });
+        return;
+    }
+
+    const siteId = getSiteIdBySiteInItemId(itemIdTokens[0]);
+    const productId = itemIdTokens[1];
+
+    itemsToObserve = itemsToObserve.concat({
+        siteId,
+        useCaseId: 'single-item',
+        productId,
+        navigationPath
+    });
+
+    reply.send({ error: "" });
+});
 
 fastify.listen({ host: configuration.application.host, port: 3001 }, (err, address) => {
     if (err) throw err
