@@ -54,7 +54,7 @@ const observeItem = () => {
 
     setTimeout(() => {
         observeItem();
-    }, 5000 + Math.floor(Math.random() * 30000));
+    }, 5000 + Math.floor(Math.random() * 15000));
 };
 
 fastify.post('/observe-category', async (request, reply) => {
