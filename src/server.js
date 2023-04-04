@@ -1,6 +1,5 @@
 const configuration = require('./configuration/app-config')();
 const httpClient = require('axios');
-const repl = require("repl");
 
 let categoriesToObserve = [];
 let itemsToObserve = [];
@@ -117,7 +116,6 @@ fastify.put('/observable-items', async (request, reply) => {
 })
 
 const getSiteIdBySiteInItemId = (siteInItemId) => {
-    console.log(siteInItemId);
     const mapping = {
         azo: 'amazon-de_DE',
         bgs: 'big-green-smile-de_DE',
@@ -127,6 +125,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         myt: 'mytoys-de_DE',
         shopapo: 'shop-apotheke-de_DE',
         shop24d: 'shop24direct-de_DE',
+        toom: 'toom-de_DE',
         tpf: 'top-parfuemerie-de_DE'
     };
 
@@ -137,7 +136,6 @@ fastify.post('/update-item', async (request, reply) => {
     reply.type('application/json').code(200);
 
     const { itemId, navigationPath } = request.body;
-    console.log(itemId);
     const itemIdTokens = (itemId || '').split('.');
 
     if (2 !== (itemIdTokens || []).length) {
