@@ -6,6 +6,7 @@ let categoriesToObserve = [];
 let itemsToObserve = [];
 
 const availableSites = [
+    '100-percent-pure-de_DE',
     'amazon-de_DE',
     'black-is-beautiful-de_DE',
     'big-green-smile-de_DE',
@@ -14,7 +15,8 @@ const availableSites = [
     'mytoys-de_DE',
     'shop-apotheke-de_DE',
     'shop24direct-de_DE',
-    'top-parfuemerie-de_DE'
+    'top-parfuemerie-de_DE',
+    'toom-de_DE'
 ];
 const sitesWithAvailableGtinSearch = [
     'amazon-de_DE',
@@ -37,7 +39,7 @@ const observeItem = () => {
         console.log('observing item ...');
         console.log(`items left: ${itemsToObserve.length}`);
 
-        const url = `http://${configuration.services.satellite.host}:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
+        const url = `http://${configuration.services.satellite.host}:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call: ${url}`);
         httpClient.get(url).catch(() => {});
     }
@@ -88,12 +90,17 @@ fastify.put('/observable-items', async (request, reply) => {
     let { gtins = [] } = requestBody;
     gtins = Array.isArray(gtins) ? gtins : [gtins];
 
-    itemsToObserve = itemsToObserve.concat(productIds.map(productId => ({
-        siteId,
-        useCaseId,
-        productId,
-        navigationPath
-    })));
+    itemsToObserve = itemsToObserve.concat(productIds.map(productId => {
+        const productIdTokens = (productId || '').split('|');
+
+        return {
+            siteId,
+            useCaseId,
+            productId: productIdTokens[0],
+            productCanonical: productIdTokens.length > 1 ? productIdTokens[1] : '',
+            navigationPath
+        };
+    }));
 
     if (gtins) {
         sitesWithAvailableGtinSearch.forEach((siteWithAvailableGtinSearch) => {
