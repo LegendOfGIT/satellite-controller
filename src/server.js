@@ -15,6 +15,7 @@ const availableSites = [
     'reifen-de_DE',
     'shop-apotheke-de_DE',
     'shop24direct-de_DE',
+    'studibuch-de_DE',
     'top-parfuemerie-de_DE',
     'toom-de_DE'
 ];
@@ -127,6 +128,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         reifenDE: 'reifen-de_DE',
         shopapo: 'shop-apotheke-de_DE',
         shop24d: 'shop24direct-de_DE',
+        studibu: 'studibuch-de_DE',
         toom: 'toom-de_DE',
         tpf: 'top-parfuemerie-de_DE'
     };
