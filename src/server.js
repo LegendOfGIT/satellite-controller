@@ -126,6 +126,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         fmw: 'fussmatten-welt-de_DE',
         myt: 'mytoys-de_DE',
         reifenDE: 'reifen-de_DE',
+        otto: 'otto-de_DE',
         shopapo: 'shop-apotheke-de_DE',
         shop24d: 'shop24direct-de_DE',
         studibu: 'studibuch-de_DE',
