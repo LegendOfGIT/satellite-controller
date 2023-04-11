@@ -16,6 +16,7 @@ const availableSites = [
     'reifen-de_DE',
     'shop-apotheke-de_DE',
     'shop24direct-de_DE',
+    'studibuch-de_DE',
     'top-parfuemerie-de_DE',
     'toom-de_DE'
 ];
@@ -56,7 +57,7 @@ const observeItem = () => {
 
     setTimeout(() => {
         observeItem();
-    }, 5000 + Math.floor(Math.random() * 15000));
+    }, 5000 + Math.floor(Math.random() * 20000));
 };
 
 fastify.post('/observe-category', async (request, reply) => {
@@ -127,8 +128,10 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         iwmh: 'iwmh-chair-de_DE',
         myt: 'mytoys-de_DE',
         reifenDE: 'reifen-de_DE',
+        otto: 'otto-de_DE',
         shopapo: 'shop-apotheke-de_DE',
         shop24d: 'shop24direct-de_DE',
+        studibu: 'studibuch-de_DE',
         toom: 'toom-de_DE',
         tpf: 'top-parfuemerie-de_DE'
     };
