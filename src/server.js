@@ -12,6 +12,7 @@ const availableSites = [
     'big-green-smile-de_DE',
     'dress-for-less-de_DE',
     'fussmatten-welt-de_DE',
+    'iwmh-chair-de_DE',
     'mytoys-de_DE',
     'reifen-de_DE',
     'shop-apotheke-de_DE',
@@ -57,7 +58,7 @@ const observeItem = () => {
 
     setTimeout(() => {
         observeItem();
-    }, 5000 + Math.floor(Math.random() * 15000));
+    }, 5000 + Math.floor(Math.random() * 20000));
 };
 
 fastify.post('/observe-category', async (request, reply) => {
@@ -126,6 +127,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         bisb: 'black-is-beautiful-de_DE',
         dfl: 'dress-for-less-de_DE',
         fmw: 'fussmatten-welt-de_DE',
+        iwmh: 'iwmh-chair-de_DE',
         myt: 'mytoys-de_DE',
         reifenDE: 'reifen-de_DE',
         otto: 'otto-de_DE',
