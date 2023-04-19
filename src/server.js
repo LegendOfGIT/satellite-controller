@@ -21,7 +21,8 @@ const availableSites = [
     'shop24direct-de_DE',
     'studibuch-de_DE',
     'top-parfuemerie-de_DE',
-    'toom-de_DE'
+    'toom-de_DE',
+    'waschbaer-de_DE'
 ];
 const sitesWithAvailableGtinSearch = [
     'amazon-de_DE',
@@ -139,7 +140,8 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         shop24d: 'shop24direct-de_DE',
         studibu: 'studibuch-de_DE',
         toom: 'toom-de_DE',
-        tpf: 'top-parfuemerie-de_DE'
+        tpf: 'top-parfuemerie-de_DE',
+        waschb: 'waschbaer-de_DE'
     };
 
     return mapping[siteInItemId] || '';
