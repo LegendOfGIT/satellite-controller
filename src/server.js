@@ -27,7 +27,8 @@ const availableSites = [
     'studibuch-de_DE',
     'top-parfuemerie-de_DE',
     'toom-de_DE',
-    'waschbaer-de_DE'
+    'waschbaer-de_DE',
+    'white-collection-de_DE'
 ];
 const sitesWithAvailableGtinSearch = [
     'amazon-de_DE',
@@ -151,7 +152,8 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         studibu: 'studibuch-de_DE',
         toom: 'toom-de_DE',
         tpf: 'top-parfuemerie-de_DE',
-        waschb: 'waschbaer-de_DE'
+        waschb: 'waschbaer-de_DE',
+        whitecol: 'white-collection-de_DE'
     };
 
     return mapping[siteInItemId] || '';
