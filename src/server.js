@@ -21,6 +21,7 @@ const availableSites = [
     'mytoys-de_DE',
     'natural-food-de_DE',
     'pakama-de_DE',
+    'plantlife-de_DE',
     'reifen-de_DE',
     'shop-apotheke-de_DE',
     'shop24direct-de_DE',
@@ -127,7 +128,6 @@ fastify.put('/observable-items', async (request, reply) => {
 
 const getSiteIdBySiteInItemId = (siteInItemId) => {
     const mapping = {
-        'amazon.de': 'amazon-de_DE',
         azo: 'amazon-de_DE',
         backmar: 'backmarket-de_DE',
         bearfam: 'bear-family-de_DE',
@@ -142,6 +142,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         iwmh: 'iwmh-chair-de_DE',
         myt: 'mytoys-de_DE',
         natfu: 'natural-food-de_DE',
+        plantli: 'plantlife-de_DE',
         reifenDE: 'reifen-de_DE',
         otto: 'otto-de_DE',
         paka: 'pakama-de_DE',
@@ -171,7 +172,7 @@ fastify.post('/update-item', async (request, reply) => {
 
 
     const siteId = getSiteIdBySiteInItemId(itemIdTokens[0]);
-    const productId = itemIdTokens[1].replaceAll('de-', '');
+    const productId = itemIdTokens[1];
 
 
     itemsToObserve = itemsToObserve.concat({
