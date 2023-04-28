@@ -170,8 +170,10 @@ fastify.post('/update-item', async (request, reply) => {
         return;
     }
 
+    console.log(itemIdTokens);
     const siteId = getSiteIdBySiteInItemId(itemIdTokens[0]);
     const productId = itemIdTokens[1];
+
 
     itemsToObserve = itemsToObserve.concat({
         siteId,
