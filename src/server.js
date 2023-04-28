@@ -30,10 +30,7 @@ const availableSites = [
     'waschbaer-de_DE',
     'white-collection-de_DE'
 ];
-const sitesWithAvailableGtinSearch = [
-    'amazon-de_DE',
-    'big-green-smile-de_DE'
-];
+const sitesWithAvailableGtinSearch = [];
 
 const fastify = require('fastify')({
     logger: true
