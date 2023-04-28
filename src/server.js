@@ -163,6 +163,7 @@ fastify.post('/update-item', async (request, reply) => {
     reply.type('application/json').code(200);
 
     const { itemId, navigationPath } = request.body;
+    console.log(request.body);
     const itemIdTokens = (itemId || '').split('.');
 
     if (2 !== (itemIdTokens || []).length) {
@@ -170,7 +171,7 @@ fastify.post('/update-item', async (request, reply) => {
         return;
     }
 
-    console.log(itemIdTokens);
+
     const siteId = getSiteIdBySiteInItemId(itemIdTokens[0]);
     const productId = itemIdTokens[1];
 
