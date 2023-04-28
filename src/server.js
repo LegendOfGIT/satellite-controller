@@ -173,7 +173,7 @@ fastify.post('/update-item', async (request, reply) => {
 
 
     const siteId = getSiteIdBySiteInItemId(itemIdTokens[0]);
-    const productId = itemIdTokens[1];
+    const productId = itemIdTokens[1].replaceAll('de-', '');
 
 
     itemsToObserve = itemsToObserve.concat({
