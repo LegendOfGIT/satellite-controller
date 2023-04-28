@@ -130,6 +130,7 @@ fastify.put('/observable-items', async (request, reply) => {
 
 const getSiteIdBySiteInItemId = (siteInItemId) => {
     const mapping = {
+        'amazon.de': 'amazon-de_DE',
         azo: 'amazon-de_DE',
         backmar: 'backmarket-de_DE',
         bearfam: 'bear-family-de_DE',
