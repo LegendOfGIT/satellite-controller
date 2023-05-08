@@ -6,7 +6,7 @@ let itemsToObserve = [];
 
 const availableSites = [
     '100-percent-pure-de_DE',
-    'amazon-de_DE',
+    //'amazon-de_DE',
     'backmarket-de_DE',
     'bear-family-de_DE',
     'black-is-beautiful-de_DE',
@@ -26,6 +26,7 @@ const availableSites = [
     'shop-apotheke-de_DE',
     'shop24direct-de_DE',
     'studibuch-de_DE',
+    'third-of-life-de_DE',
     'top-parfuemerie-de_DE',
     'toom-de_DE',
     'waschbaer-de_DE',
@@ -149,6 +150,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         shopapo: 'shop-apotheke-de_DE',
         shop24d: 'shop24direct-de_DE',
         studibu: 'studibuch-de_DE',
+        thirdol: 'third-of-life-de_DE',
         toom: 'toom-de_DE',
         tpf: 'top-parfuemerie-de_DE',
         waschb: 'waschbaer-de_DE',
