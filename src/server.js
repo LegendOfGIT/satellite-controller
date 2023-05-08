@@ -6,7 +6,7 @@ let itemsToObserve = [];
 
 const availableSites = [
     '100-percent-pure-de_DE',
-    //'amazon-de_DE',
+    'amazon-de_DE',
     'backmarket-de_DE',
     'bear-family-de_DE',
     'black-is-beautiful-de_DE',
