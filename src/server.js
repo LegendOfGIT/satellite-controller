@@ -162,7 +162,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         songmi: 'songmics-de_DE',
         studibu: 'studibuch-de_DE',
         thirdol: 'third-of-life-de_DE',
-        timberta: 'timber-tast-de_DE',
+        timberta: 'timber-taste-de_DE',
         toom: 'toom-de_DE',
         tpf: 'top-parfuemerie-de_DE',
         waschb: 'waschbaer-de_DE',
