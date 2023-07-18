@@ -26,6 +26,7 @@ const availableSites = [
     'messmer-de_DE',
     'mytoys-de_DE',
     'natural-food-de_DE',
+    'otto-de_DE',
     'pakama-de_DE',
     'plantlife-de_DE',
     'quelle-de_DE',
