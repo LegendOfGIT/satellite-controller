@@ -41,6 +41,7 @@ const availableSites = [
     'timber-taste-de_DE',
     'top-parfuemerie-de_DE',
     'toom-de_DE',
+    'vertical-extreme-de_DE',
     'waschbaer-de_DE',
     'white-collection-de_DE'
 ];
@@ -176,6 +177,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         timberta: 'timber-taste-de_DE',
         toom: 'toom-de_DE',
         tpf: 'top-parfuemerie-de_DE',
+        vertex: 'vertical-extreme-de_DE',
         waschb: 'waschbaer-de_DE',
         whitecol: 'white-collection-de_DE'
     };
