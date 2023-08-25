@@ -7,6 +7,7 @@ let itemsToObserve = [];
 const availableSites = [
     '100-percent-pure-de_DE',
     'amazon-de_DE',
+    'awg-mode-de_DE',
     'backmarket-de_DE',
     'bear-family-de_DE',
     'black-is-beautiful-de_DE',
@@ -144,6 +145,7 @@ fastify.put('/observable-items', async (request, reply) => {
 
 const getSiteIdBySiteInItemId = (siteInItemId) => {
     const mapping = {
+        awgmode: 'awg-mode-de_DE',
         azo: 'amazon-de_DE',
         backmar: 'backmarket-de_DE',
         bearfam: 'bear-family-de_DE',
