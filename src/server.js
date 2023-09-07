@@ -7,6 +7,7 @@ let itemsToObserve = [];
 const availableSites = [
     '100-percent-pure-de_DE',
     'amazon-de_DE',
+    'artgerecht-de_DE',
     'awg-mode-de_DE',
     'backmarket-de_DE',
     'bear-family-de_DE',
@@ -19,6 +20,7 @@ const availableSites = [
     'enners-shop-de_DE',
     'flaconi-de_DE',
     'fussmatten-welt-de_DE',
+    'galapel-de_DE',
     'haymancoffee-de_DE',
     'hoerner-de_DE',
     'idee-shop-de_DE',
@@ -146,6 +148,7 @@ fastify.put('/observable-items', async (request, reply) => {
 
 const getSiteIdBySiteInItemId = (siteInItemId) => {
     const mapping = {
+        artgerecht: 'artgerecht-de_DE',
         awgmode: 'awg-mode-de_DE',
         azo: 'amazon-de_DE',
         backmar: 'backmarket-de_DE',
@@ -159,6 +162,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         ennshop: 'enners-shop-de_DE',
         flaco: 'flaconi-de_DE',
         fmw: 'fussmatten-welt-de_DE',
+        galapel: 'galapel-de_DE',
         haymancof: 'haymancoffee-de_DE',
         hoerner: 'hoerner-de_DE',
         idee: 'idee-shop-de_DE',
