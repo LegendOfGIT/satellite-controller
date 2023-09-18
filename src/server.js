@@ -11,8 +11,9 @@ const availableSites = [
     'awg-mode-de_DE',
     'backmarket-de_DE',
     'bear-family-de_DE',
-    'black-is-beautiful-de_DE',
     'big-green-smile-de_DE',
+    'black-is-beautiful-de_DE' +
+    'bruno-banani-de_DE',
     'buch24-de_DE',
     'dress-for-less-de_DE',
     'dunleath-de_DE',
@@ -157,6 +158,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
         bearfam: 'bear-family-de_DE',
         bgs: 'big-green-smile-de_DE',
         bisb: 'black-is-beautiful-de_DE',
+        brunban: 'bruno-banani-de_DE',
         buch24: 'buch24-de_DE',
         dfl: 'dress-for-less-de_DE',
         dunleath: 'dunleath-de_DE',
