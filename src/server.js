@@ -12,7 +12,7 @@ const availableSites = [
     'backmarket-de_DE',
     'bear-family-de_DE',
     'big-green-smile-de_DE',
-    'black-is-beautiful-de_DE' +
+    'black-is-beautiful-de_DE',
     'bruno-banani-de_DE',
     'buch24-de_DE',
     'dress-for-less-de_DE',
