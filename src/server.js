@@ -7,6 +7,7 @@ let itemsToObserve = [];
 const availableSites = [
     '100-percent-pure-de_DE',
     'amazon-de_DE',
+    'amd-moebel-de_DE',
     'artgerecht-de_DE',
     'awg-mode-de_DE',
     'backmarket-de_DE',
@@ -153,6 +154,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
     const mapping = {
         artgerecht: 'artgerecht-de_DE',
         awgmode: 'awg-mode-de_DE',
+        amdmoebel: 'amd-moebel-de_DE',
         azo: 'amazon-de_DE',
         backmar: 'backmarket-de_DE',
         bearfam: 'bear-family-de_DE',
