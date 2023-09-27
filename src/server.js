@@ -6,6 +6,7 @@ let itemsToObserve = [];
 
 const availableSites = [
     '100-percent-pure-de_DE',
+    '60beans-de_DE',
     'amazon-de_DE',
     'amd-moebel-de_DE',
     'artgerecht-de_DE',
@@ -152,6 +153,8 @@ fastify.put('/observable-items', async (request, reply) => {
 
 const getSiteIdBySiteInItemId = (siteInItemId) => {
     const mapping = {
+        "100pp": '100-percent-pure-de_DE',
+        "60beans": '60beans-de_DE',
         artgerecht: 'artgerecht-de_DE',
         awgmode: 'awg-mode-de_DE',
         amdmoebel: 'amd-moebel-de_DE',
