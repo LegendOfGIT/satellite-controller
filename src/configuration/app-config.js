@@ -8,7 +8,8 @@ module.exports =
                 },
                 services: {
                     satellite: {
-                        host: '127.0.0.1'
+                        host: '127.0.0.1',
+                        ports: [ 3000 ]
                     }
                 }
             },
@@ -18,7 +19,8 @@ module.exports =
                 },
                 services: {
                     satellite: {
-                        host: 'satellite'
+                        host: 'satellite',
+                        ports: [ 2999, 3000 ]
                     }
                 }
             }

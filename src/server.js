@@ -63,10 +63,20 @@ const fastify = require('fastify')({
 });
 
 const shuffleArray = (arr) => arr.sort(() => .5 - Math.random());
+let currentSatellitePortIndex = -1;
+
+const getNextSatellitePort = () => {
+    currentSatellitePortIndex++;
+    const satellitePorts = configuration.services.satellite.ports;
+
+    currentSatellitePortIndex = currentSatellitePortIndex > satellitePorts.length -1 ? 0 : currentSatellitePortIndex;
+    return satellitePorts[currentSatellitePortIndex];
+}
 
 const observeItem = () => {
     console.log('observe ...')
 
+    const satellitePort = getNextSatellitePort();
     const itemToObserve = itemsToObserve.pop();
     if (itemToObserve) {
         itemsToObserve = shuffleArray(itemsToObserve);
@@ -74,7 +84,7 @@ const observeItem = () => {
         console.log('observing item ...');
         console.log(`items left: ${itemsToObserve.length}`);
 
-        const url = `http://${configuration.services.satellite.host}:3000/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
+        const url = `http://${configuration.services.satellite.host}:${satellitePort}/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call: ${url}`);
         httpClient.get(url).catch(() => {});
     }
@@ -82,7 +92,7 @@ const observeItem = () => {
     const categoryToObserve = categoriesToObserve.pop();
     if (categoryToObserve) {
         availableSites.forEach(availableSite => {
-            const url = `http://${configuration.services.satellite.host}:3000/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
+            const url = `http://${configuration.services.satellite.host}:${satellitePort}/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
             console.log(`call: ${url}`);
             httpClient.get(url).catch(() => {});
         });
@@ -90,7 +100,7 @@ const observeItem = () => {
 
     setTimeout(() => {
         observeItem();
-    }, 5000 + Math.floor(Math.random() * 20000));
+    }, 2500 + Math.floor(Math.random() * 10000));
 };
 
 fastify.post('/observe-category', async (request, reply) => {
