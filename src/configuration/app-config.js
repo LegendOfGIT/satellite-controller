@@ -20,7 +20,7 @@ module.exports =
                 services: {
                     satellite: {
                         host: 'satellite',
-                        ports: [ 2999, 3000 ]
+                        ports: [ 2998, 2999, 3000 ]
                     }
                 }
             }
