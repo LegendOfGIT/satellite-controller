@@ -230,7 +230,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
 fastify.post('/update-item', async (request, reply) => {
     reply.type('application/json').code(200);
 
-    const { itemId, navigationPath } = request.body;
+    const { itemId, navigationPath, withHighPriority = false } = request.body;
     console.log(request.body);
     const itemIdTokens = (itemId || '').split('.');
 
@@ -243,13 +243,19 @@ fastify.post('/update-item', async (request, reply) => {
     const siteId = getSiteIdBySiteInItemId(itemIdTokens[0]);
     const productId = itemIdTokens[1];
 
-
-    itemsToObserve = itemsToObserve.concat({
+    const itemToObserve = {
         siteId,
         useCaseId: 'single-item',
         productId,
         navigationPath
-    });
+    };
+
+    if (withHighPriority) {
+        itemsToObserve = [itemToObserve].concat(itemsToObserve);
+    }
+    else {
+        itemsToObserve.push(itemToObserve);
+    }
 
     reply.send({ error: "" });
 });
