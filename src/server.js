@@ -81,7 +81,6 @@ const getNextSatellitePort = () => {
 const observeItem = () => {
     console.log('observe ...')
 
-    const satellitePort = getNextSatellitePort();
     const itemToObserve = itemsToObserve.pop();
     if (itemToObserve) {
         itemsToObserve = shuffleArray(itemsToObserve);
@@ -89,7 +88,7 @@ const observeItem = () => {
         console.log('observing item ...');
         console.log(`items left: ${itemsToObserve.length}`);
 
-        const url = `http://${configuration.services.satellite.host}:${satellitePort}/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
+        const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call: ${url}`);
         httpClient.get(url).catch(() => {});
     }
@@ -97,7 +96,7 @@ const observeItem = () => {
     const categoryToObserve = categoriesToObserve.pop();
     if (categoryToObserve) {
         availableSites.forEach(availableSite => {
-            const url = `http://${configuration.services.satellite.host}:${satellitePort}/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
+            const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
             console.log(`call: ${url}`);
             httpClient.get(url).catch(() => {});
         });
