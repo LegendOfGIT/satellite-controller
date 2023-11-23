@@ -252,7 +252,7 @@ fastify.post('/update-item', async (request, reply) => {
         navigationPath
     };
 
-    if (withHighPriority) {
+    if (!withHighPriority) {
         itemsToObserve = [itemToObserve].concat(itemsToObserve);
     }
     else {
