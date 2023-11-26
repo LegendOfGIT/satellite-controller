@@ -84,8 +84,6 @@ const observeItem = () => {
 
     const itemToObserve = itemsToObserve.pop();
     if (itemToObserve) {
-        itemsToObserve = shuffleArray(itemsToObserve);
-
         console.log('observing item ...');
         console.log(`items left: ${itemsToObserve.length}`);
 
