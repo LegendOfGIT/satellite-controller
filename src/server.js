@@ -83,9 +83,9 @@ const regularLane = () => {
     console.log('observe ... (regular)')
 
     const itemToObserve = regularLaneItems.pop();
+    console.log(`items left (regular): ${regularLaneItems.length}`);
     if (itemToObserve) {
         console.log('observing item ... (regular)');
-        console.log(`items left (regular): ${regularLaneItems.length}`);
 
         const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call (regular): ${url}`);
@@ -109,10 +109,9 @@ const fastLane = () => {
     console.log('observe (fast) ...')
 
     const itemToObserve = fastLaneItems.pop();
+    console.log(`items left (fast): ${fastLaneItems.length}`);
     if (itemToObserve) {
         console.log('observing item (fast) ...');
-        console.log(`items left (fast): ${fastLaneItems.length}`);
-
         const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
         console.log(`call (fast): ${url}`);
         httpClient.get(url).catch(() => {});
