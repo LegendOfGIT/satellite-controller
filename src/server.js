@@ -97,7 +97,9 @@ const regularLane = () => {
         availableSites.forEach(availableSite => {
             const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
             console.log(`call (regular): ${url}`);
-            httpClient.get(url).catch(() => {});
+            setTimeout(() => {
+                httpClient.get(url).catch(() => {});
+            }, Math.floor(Math.random() * 4000));
         });
     }
 
