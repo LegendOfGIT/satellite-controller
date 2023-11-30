@@ -2,7 +2,8 @@ const configuration = require('./configuration/app-config')();
 const httpClient = require('axios');
 
 let categoriesToObserve = [];
-let itemsToObserve = [];
+let fastLaneItems = [];
+let regularLaneItems = [];
 
 const availableSites = [
     '100-percent-pure-de_DE',
@@ -68,7 +69,6 @@ const fastify = require('fastify')({
     logger: true
 });
 
-const shuffleArray = (arr) => arr.sort(() => .5 - Math.random());
 let currentSatellitePortIndex = -1;
 
 const getNextSatellitePort = () => {
@@ -79,16 +79,16 @@ const getNextSatellitePort = () => {
     return satellitePorts[currentSatellitePortIndex];
 }
 
-const observeItem = () => {
-    console.log('observe ...')
+const regularLane = () => {
+    console.log('observe ... (regular)')
 
-    const itemToObserve = itemsToObserve.pop();
+    const itemToObserve = regularLaneItems.pop();
     if (itemToObserve) {
-        console.log('observing item ...');
-        console.log(`items left: ${itemsToObserve.length}`);
+        console.log('observing item ... (regular)');
+        console.log(`items left (regular): ${regularLaneItems.length}`);
 
         const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
-        console.log(`call: ${url}`);
+        console.log(`call (regular): ${url}`);
         httpClient.get(url).catch(() => {});
     }
 
@@ -96,14 +96,31 @@ const observeItem = () => {
     if (categoryToObserve) {
         availableSites.forEach(availableSite => {
             const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${availableSite}/use-case/${categoryToObserve.id}`;
-            console.log(`call: ${url}`);
+            console.log(`call (regular): ${url}`);
             httpClient.get(url).catch(() => {});
         });
     }
 
     setTimeout(() => {
-        observeItem();
+        regularLane();
     }, 2500 + Math.floor(Math.random() * 8000));
+};
+const fastLane = () => {
+    console.log('observe (fast) ...')
+
+    const itemToObserve = fastLaneItems.pop();
+    if (itemToObserve) {
+        console.log('observing item (fast) ...');
+        console.log(`items left (fast): ${fastLaneItems.length}`);
+
+        const url = `http://${configuration.services.satellite.host}:${getNextSatellitePort()}/observe/site/${itemToObserve.siteId}/use-case/${itemToObserve.useCaseId}?itemId=${itemToObserve.productId}&itemCanonical=${itemToObserve.productCanonical}&navigationPath=${(itemToObserve['navigationPath'] || []).join(',')}`;
+        console.log(`call (fast): ${url}`);
+        httpClient.get(url).catch(() => {});
+    }
+
+    setTimeout(() => {
+        fastLane();
+    }, 1000 + Math.floor(Math.random() * 4000));
 };
 
 fastify.post('/observe-category', async (request, reply) => {
@@ -138,7 +155,7 @@ fastify.put('/observable-items', async (request, reply) => {
     let { gtins = [] } = requestBody;
     gtins = Array.isArray(gtins) ? gtins : [gtins];
 
-    itemsToObserve = itemsToObserve.concat(productIds.map(productId => {
+    regularLaneItems = regularLaneItems.concat(productIds.map(productId => {
         const productIdTokens = (productId || '').split('|');
 
         return {
@@ -152,7 +169,7 @@ fastify.put('/observable-items', async (request, reply) => {
 
     if (gtins) {
         sitesWithAvailableGtinSearch.forEach((siteWithAvailableGtinSearch) => {
-            itemsToObserve = itemsToObserve.concat(gtins.map(gtin => ({
+            regularLaneItems = regularLaneItems.concat(gtins.map(gtin => ({
                 siteId: siteWithAvailableGtinSearch,
                 useCaseId: 'single-item-by-gtin',
                 productId: '{gtin}' === (gtin || '') ? '' : gtin,
@@ -161,7 +178,7 @@ fastify.put('/observable-items', async (request, reply) => {
         });
     }
 
-    reply.send(itemsToObserve);
+    reply.send(regularLaneItems);
 })
 
 const getSiteIdBySiteInItemId = (siteInItemId) => {
@@ -239,7 +256,6 @@ fastify.post('/update-item', async (request, reply) => {
         return;
     }
 
-
     const siteId = getSiteIdBySiteInItemId(itemIdTokens[0]);
     const productId = itemIdTokens[1];
 
@@ -251,10 +267,10 @@ fastify.post('/update-item', async (request, reply) => {
     };
 
     if (!withHighPriority) {
-        itemsToObserve = [itemToObserve].concat(itemsToObserve);
+        fastLaneItems = [itemToObserve].concat(fastLaneItems);
     }
     else {
-        itemsToObserve.push(itemToObserve);
+        fastLaneItems.push(itemToObserve);
     }
 
     reply.send({ error: "" });
@@ -264,5 +280,6 @@ fastify.listen({ host: configuration.application.host, port: 3001 }, (err, addre
     if (err) throw err
     fastify.log.info(`server listening on ${address}`);
 
-    observeItem();
+    regularLane();
+    fastLane();
 });
