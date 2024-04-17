@@ -44,6 +44,7 @@ const availableSites = [
     'medimops-de_DE',
     'messmer-de_DE',
     'metabrew-society-de_DE',
+    'mlily-de_DE',
     'natural-food-de_DE',
     'natures-way-de_DE',
     'oh-my-fantasy-de_DE',
