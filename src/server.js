@@ -9,7 +9,7 @@ const availableSites = [
     '100-percent-pure-de_DE',
     'amazon-de_DE',
     'amd-moebel-de_DE',
-    'artgerecht-de_DE',
+    //'artgerecht-de_DE',
     'asian-foodlovers-de_DE',
     'backmarket-de_DE',
     'bear-family-de_DE',
@@ -196,7 +196,7 @@ const getSiteIdBySiteInItemId = (siteInItemId) => {
     const mapping = {
         "100pp": '100-percent-pure-de_DE',
         afl: 'asian-foodlovers-de_DE',
-        artgerecht: 'artgerecht-de_DE',
+        //artgerecht: 'artgerecht-de_DE',
         amdmoebel: 'amd-moebel-de_DE',
         azo: 'amazon-de_DE',
         backmar: 'backmarket-de_DE',
