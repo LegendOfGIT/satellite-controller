@@ -72,7 +72,7 @@ const availableSites = [
     'vertical-extreme-de_DE',
     'waschbaer-de_DE',
     'white-collection-de_DE'
-];s
+];
 const sitesWithAvailableGtinSearch = [];
 
 const fastify = require('fastify')({
